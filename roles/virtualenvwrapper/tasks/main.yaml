@@ -1,0 +1,18 @@
+---
+- name: install virtualenv and virtualenvwrapper
+  become: true
+  pip:
+    name: "{{item}}"
+    executable: pip3
+  with_items:
+    - virtualenv
+    - virtualenvwrapper
+
+- name: set env for virtualwrapper
+  lineinfile:
+    dest: "{{VENV_USER_HOME}}/.profile"
+    line: "{{item}}"
+  with_items:
+    - "export VIRTUALENV_WRAPPER_PYTHON={{PYTHON_EXE}}"
+    - "export WORKON_HOME={{WORKON_HOME}}"
+    - "source /usr/local/bin/virtualenvwrapper.sh > /dev/null"

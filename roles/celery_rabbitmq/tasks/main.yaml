@@ -1,0 +1,18 @@
+---
+- name: add rabbitmq public key
+  become: true
+  apt_key:
+    url: https://www.rabbitmq.com/rabbitmq-release-signing-key.asc
+
+- name: add rabbitmq repository to ATP
+  shell: echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+  
+- name: install rabbitmq
+  become: true
+  apt:
+    name: rabbitmq-server
+
+- name: install celery
+  pip:
+    name: celery
+    virtualenv: "{{VENV}}"

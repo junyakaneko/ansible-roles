@@ -1,0 +1,9 @@
+#!/bin/bash
+
+WORKING_DIR="{{DJANGO_PROJECT_HOME}}"
+ACTIVATE_PATH="{{VENV}}/bin/activate"
+
+cd ${WORKING_DIR}
+source ${ACTIVATE_PATH}
+
+exec gunicorn {{DJANGO_PROJECT_NAME}}.wsgi -b unix://{{DJANGO_PROJECT_HOME}}/gunicorn.sock

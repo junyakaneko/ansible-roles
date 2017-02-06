@@ -1,0 +1,29 @@
+---
+
+#
+# Settings for ansistrano deploy
+#
+
+DEPLOY_HOME: /home/ubuntu
+DEPLOY_APP: your_app_name
+DEPLOY_PATH: "{{DEPLOY_HOME}}/{{DEPLOY_APP}}"
+CURRENT_RELEASE_PATH: "{{DEPLOY_PATH}}/current"
+
+
+#
+# Settings for virtualenv and virtualenv wrapper
+#
+
+PYTHON_EXE: /usr/bin/python3
+VENV_USER: ubuntu
+VENV_USER_HOME: "/home/{{VENV_USER}}"
+WORKON_HOME: "{{VENV_USER_HOME}}/.venv"
+VENV: "{{VENV_USER_HOME}}/.venv/{{DEPLOY_APP}}"
+
+#
+# Settings for restful-django project
+#
+
+WWW_SERVER_NAME: "{{ansible_hostname}}"
+DJANGO_PROJECT_NAME: your_app_name
+DJANGO_PROJECT_HOME: "{{CURRENT_RELEASE_PATH}}/{{DJANGO_PROJECT_NAME}}"

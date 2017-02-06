@@ -1,0 +1,8 @@
+[program:{{DJANGO_PROJECT_NAME}}]
+command={{DJANGO_PROJECT_HOME}}/start.sh --loglevel=debug
+stdout_logfile={{DJANGO_PROJECT_HOME}}/supervisord.log
+directory={{DJANGO_PROJECT_HOME}}
+user=ubuntu
+autostart=true
+autorestart=true
+redirect_stderr=true

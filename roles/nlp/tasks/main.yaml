@@ -1,0 +1,21 @@
+---
+- name: install necessary apt packages
+  become: yes
+  apt:
+    name: "{{item}}"
+  with_items:
+    - libmecab-dev
+    - mecab
+    - mecab-ipadic
+    - mecab-ipadic-utf8
+    - mecab-utils
+
+- name: install mecab python3 binding
+  pip:
+    name: mecab-python3
+    virtualenv: "{{VENV}}"
+
+- name: install gensim
+  pip:
+    name: gensim
+    virtualenv: "{{VENV}}"
