@@ -28,3 +28,18 @@
       pip:
         requirements: /tmp/mps_jobs_requirements.txt
         virtualenv: "{{VENV}}"
+    - name: make app production mode
+      replace:
+        dest: "{{CURRENT_RELEASE_PATH}}/mps_jobs/settings.py"
+        regexp: 'DEBUG = True'
+        replace: 'DEBUG = False'
+    - name: migrate db
+      django_manage:
+        command: migrate
+        app_path: "{{CURRENT_RELEASE_PATH}}"
+        virtualenv: "{{VENV}}"
+    - name: restart app
+      become: True
+      supervisorctl:
+        name: "{{DJANGO_PROJECT_NAME}}"
+        state: restarted
