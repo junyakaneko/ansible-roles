@@ -18,6 +18,14 @@ upstream app_server {
 	 server unix:/{{DJANGO_PROJECT_HOME}}/gunicorn.sock fail_timeout=0;
 }
 
+
+server {
+    listen 80;
+    server_name {{WWW_SERVER_NAME}};
+    return 301 https://$host$request_uri;
+}
+
+
 server {
 	#listen 80;
 	#listen [::]:80;
