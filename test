@@ -1,0 +1,2 @@
+[webservers]
+career.mpsamurai.org	ansible_user=ubuntu

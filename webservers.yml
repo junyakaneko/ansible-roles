@@ -1,0 +1,30 @@
+---
+- name: install python
+  hosts: webservers
+  gather_facts: False
+  tasks:
+    - raw: sudo bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python-minimal)"
+  
+- name: deploy webapp
+  hosts: webservers
+  vars:
+    ansistrano_deploy_from: "{{playbook_dir}}/.."
+    ansistrano_deploy_to: "{{DEPLOY_PATH}}"
+  roles:
+    - carlosbuenosvinos.ansistrano-deploy
+
+- name: install restful django
+  hosts: webservers
+  roles:
+    - virtualenvwrapper
+    - restful_django
+  tasks:
+    - name: copy requirements.txt
+      copy:
+        src: "{{playbook_dir}}/../requirements.txt"
+        dest: /tmp/mps_jobs_requirements.txt
+        force: True
+    - name: install requirements.txt
+      pip:
+        requirements: /tmp/mps_jobs_requirements.txt
+        virtualenv: "{{VENV}}"

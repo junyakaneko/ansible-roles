@@ -5,7 +5,7 @@
 #
 
 DEPLOY_HOME: /home/ubuntu
-DEPLOY_APP: your_app_name
+DEPLOY_APP: mps_jobs
 DEPLOY_PATH: "{{DEPLOY_HOME}}/{{DEPLOY_APP}}"
 CURRENT_RELEASE_PATH: "{{DEPLOY_PATH}}/current"
 
@@ -24,6 +24,6 @@ VENV: "{{VENV_USER_HOME}}/.venv/{{DEPLOY_APP}}"
 # Settings for restful-django project
 #
 
-WWW_SERVER_NAME: "{{ansible_hostname}}"
-DJANGO_PROJECT_NAME: your_app_name
-DJANGO_PROJECT_HOME: "{{CURRENT_RELEASE_PATH}}/{{DJANGO_PROJECT_NAME}}"
+WWW_SERVER_NAME: "career.mpsamurai.org"
+DJANGO_PROJECT_NAME: mps_jobs
+DJANGO_PROJECT_HOME: "{{CURRENT_RELEASE_PATH}}"
